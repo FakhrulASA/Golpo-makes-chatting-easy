@@ -1,3 +1,8 @@
+import 'package:chat_time/screen/chartlist_screen.dart';
+import 'package:chat_time/screen/login_screen.dart';
+import 'package:chat_time/screen/message_screen.dart';
+import 'package:chat_time/screen/registration_screen.dart';
+import 'package:chat_time/util/routes.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,12 +21,14 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       themeMode: ThemeMode.system,
-      home: Scaffold(
-        appBar: AppBar(title: const Text("fsafsafsa")),
-        body: Center(
-          child: const Text("AHello"),
-        ),
-      ),
+      initialRoute: ApplicationRoute.loginRoute,
+      routes: {
+        "/": (context) => LoginPage(),
+        ApplicationRoute.registrationRoute: (context) => RegistratioPage(),
+        ApplicationRoute.chartlistRoute: (context) => ChatListPage(),
+        ApplicationRoute.loginRoute: (context) => LoginPage(),
+        ApplicationRoute.messageDetailRoute: (context) => MessagePage()
+      },
     );
   }
 }
