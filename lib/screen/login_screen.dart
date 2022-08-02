@@ -10,6 +10,17 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Material(
+      child: SafeArea(
+          child: Column(
+        children: [
+          Image.asset("assets/login.png", height: 300, fit: BoxFit.cover),
+          Text(
+            "Let's login",
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          )
+        ],
+      )),
+    );
   }
 }
