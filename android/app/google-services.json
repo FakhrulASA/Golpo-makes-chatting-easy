@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "80668815864",
+    "project_id": "chat-time-6f81e",
+    "storage_bucket": "chat-time-6f81e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:80668815864:android:499426e3d110bc397c260d",
+        "android_client_info": {
+          "package_name": "com.example.chat_time"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "80668815864-e79i49kemq7ele3gnlvejkvbos6k8bc4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuCq6OadbjtlVhfZApm-aaKcwqXbpEwHg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "80668815864-e79i49kemq7ele3gnlvejkvbos6k8bc4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
