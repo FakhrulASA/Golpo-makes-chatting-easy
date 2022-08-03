@@ -24,7 +24,6 @@ class _MyAppState extends State<MyApp> {
       themeMode: ThemeMode.system,
       initialRoute: ApplicationRoute.loginRoute,
       routes: {
-        "/": (context) => LoginPage(),
         ApplicationRoute.registrationRoute: (context) => RegistratioPage(),
         ApplicationRoute.chartlistRoute: (context) => ChatListPage(),
         ApplicationRoute.loginRoute: (context) => LoginPage(),
