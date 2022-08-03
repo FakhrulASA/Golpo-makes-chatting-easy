@@ -4,14 +4,15 @@ import 'package:chat_time/screen/message_screen.dart';
 import 'package:chat_time/screen/registration_screen.dart';
 import 'package:chat_time/util/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
   runApp(MyApp());
+  await Firebase.initializeApp();
 }
 
 class MyApp extends StatefulWidget {
   MyApp({Key? key}) : super(key: key);
-
   @override
   State<MyApp> createState() => _MyAppState();
 }
