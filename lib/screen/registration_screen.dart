@@ -181,15 +181,18 @@ class _RegistratioPageState extends State<RegistratioPage> {
                 ),
                 InkWell(
                   onTap: () {
-                    showLoaderDialog(context, "Registering you, please wait!");
                     final isvalid = _formKey.currentState!.validate();
                     if (isvalid) {
+                      showLoaderDialog(
+                          context, "Registering you, please wait!");
                       _formKey.currentState!.save();
                       registerUserWithEmailAndPassword(email, password1)
                           .then((value) {
                         if (value.success) {
                           Fluttertoast.showToast(msg: value.message);
                           Navigator.pop(context);
+                          Navigator.pushReplacementNamed(
+                              context, ApplicationRoute.loginRoute);
                         } else {
                           Fluttertoast.showToast(msg: value.message);
                           Navigator.pop(context);

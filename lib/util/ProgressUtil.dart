@@ -5,17 +5,17 @@ showLoaderDialog(BuildContext context, String message) {
     content: IntrinsicHeight(
       child: Column(
         children: [
-          CircularProgressIndicator(
+          const CircularProgressIndicator(
             color: Color.fromARGB(255, 233, 167, 81),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Container(
               margin: EdgeInsets.only(left: 7),
               child: Text(
                 message,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Color.fromARGB(255, 54, 54, 54),
                     fontSize: 20,
                     fontWeight: FontWeight.w600),

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:chat_time/screen/chartlist_screen.dart';
 import 'package:chat_time/screen/login_screen.dart';
 import 'package:chat_time/screen/message_screen.dart';
@@ -5,6 +7,8 @@ import 'package:chat_time/screen/registration_screen.dart';
 import 'package:chat_time/util/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+
+import 'network/user_state.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,12 +23,22 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  var initialRoute = "";
+
   @override
   Widget build(BuildContext context) {
+    if (getUserState()) {
+      initialRoute = ApplicationRoute.chartlistRoute;
+    } else {
+      initialRoute = ApplicationRoute.loginRoute;
+    }
+
+    log("ROUTE: " + initialRoute);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
-      initialRoute: ApplicationRoute.loginRoute,
+      initialRoute: initialRoute,
       routes: {
         ApplicationRoute.registrationRoute: (context) => RegistratioPage(),
         ApplicationRoute.chartlistRoute: (context) => ChatListPage(),

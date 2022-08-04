@@ -1,9 +1,7 @@
-import 'dart:ffi';
 import 'package:chat_time/network/auth.dart';
 import 'package:chat_time/util/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
 import '../util/ProgressUtil.dart';
 
 class LoginPage extends StatefulWidget {
@@ -17,9 +15,9 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   var h1 = 50;
   var h2 = 50;
-  loginUser() {}
   var email = "";
   var password = "";
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -156,15 +154,17 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 InkWell(
                   onTap: () {
-                    showLoaderDialog(context, "Login in, please wait!");
                     final isvalid = _formKey.currentState!.validate();
                     if (isvalid) {
+                      showLoaderDialog(context, "Login in, please wait!");
                       _formKey.currentState!.save();
                       loginUserWithEmailAndPassword(email, password)
                           .then((value) {
                         if (value.success) {
                           Fluttertoast.showToast(msg: value.message);
                           Navigator.pop(context);
+                          Navigator.pushReplacementNamed(
+                              context, ApplicationRoute.chartlistRoute);
                         } else {
                           Fluttertoast.showToast(msg: value.message);
                         }
