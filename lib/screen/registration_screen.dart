@@ -1,5 +1,9 @@
 import 'package:chat_time/util/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+import '../network/auth.dart';
+import '../util/ProgressUtil.dart';
 
 class RegistratioPage extends StatefulWidget {
   RegistratioPage({Key? key}) : super(key: key);
@@ -13,6 +17,7 @@ class _RegistratioPageState extends State<RegistratioPage> {
   var h1 = 50;
   var h2 = 50;
   var h3 = 50;
+  var email = "";
   var password1 = "";
   var password2 = "";
   @override
@@ -88,6 +93,9 @@ class _RegistratioPageState extends State<RegistratioPage> {
                           setState(() {});
                         }
                         return null;
+                      },
+                      onChanged: (value) {
+                        email = value;
                       },
                     )),
                 const SizedBox(
@@ -173,9 +181,20 @@ class _RegistratioPageState extends State<RegistratioPage> {
                 ),
                 InkWell(
                   onTap: () {
+                    showLoaderDialog(context, "Registering you, please wait!");
                     final isvalid = _formKey.currentState!.validate();
                     if (isvalid) {
                       _formKey.currentState!.save();
+                      registerUserWithEmailAndPassword(email, password1)
+                          .then((value) {
+                        if (value.success) {
+                          Fluttertoast.showToast(msg: value.message);
+                          Navigator.pop(context);
+                        } else {
+                          Fluttertoast.showToast(msg: value.message);
+                          Navigator.pop(context);
+                        }
+                      });
                     }
                   },
                   child: Container(

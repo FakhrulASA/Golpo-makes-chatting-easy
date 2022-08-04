@@ -160,7 +160,7 @@ class _LoginPageState extends State<LoginPage> {
                     final isvalid = _formKey.currentState!.validate();
                     if (isvalid) {
                       _formKey.currentState!.save();
-                      registerUserWithEmailAndPassword(email, password)
+                      loginUserWithEmailAndPassword(email, password)
                           .then((value) {
                         if (value.success) {
                           Fluttertoast.showToast(msg: value.message);
