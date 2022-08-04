@@ -5,7 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../util/ProgressUtil.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key? key}) : super(key: key);
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -76,7 +76,9 @@ class _LoginPageState extends State<LoginPage> {
                           hintText: "Please enter your username or email",
                           border: InputBorder.none,
                           contentPadding: EdgeInsetsGeometry.lerp(
-                              EdgeInsets.all(10), EdgeInsets.all(10), 0.0)),
+                              const EdgeInsets.all(10),
+                              const EdgeInsets.all(10),
+                              0.0)),
                       validator: (String? value) {
                         if (value!.isEmpty) {
                           h1 = 80;

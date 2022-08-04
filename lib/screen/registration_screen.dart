@@ -6,7 +6,7 @@ import '../network/auth.dart';
 import '../util/ProgressUtil.dart';
 
 class RegistratioPage extends StatefulWidget {
-  RegistratioPage({Key? key}) : super(key: key);
+  const RegistratioPage({Key? key}) : super(key: key);
 
   @override
   State<RegistratioPage> createState() => _RegistratioPageState();
@@ -70,7 +70,7 @@ class _RegistratioPageState extends State<RegistratioPage> {
                 ),
                 Container(
                     height: h1.toDouble(),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: Color.fromARGB(255, 255, 217, 147),
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     child: TextFormField(
@@ -78,7 +78,9 @@ class _RegistratioPageState extends State<RegistratioPage> {
                           hintText: "Please enter your username or email",
                           border: InputBorder.none,
                           contentPadding: EdgeInsetsGeometry.lerp(
-                              EdgeInsets.all(10), EdgeInsets.all(10), 0.0)),
+                              const EdgeInsets.all(10),
+                              const EdgeInsets.all(10),
+                              0.0)),
                       validator: (String? value) {
                         if (value!.isEmpty) {
                           h1 = 80;
@@ -103,7 +105,7 @@ class _RegistratioPageState extends State<RegistratioPage> {
                 ),
                 Container(
                   height: h2.toDouble(),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Color.fromARGB(255, 219, 219, 219),
                       borderRadius: BorderRadius.all(Radius.circular(10))),
                   child: TextFormField(
@@ -112,7 +114,9 @@ class _RegistratioPageState extends State<RegistratioPage> {
                       hintText: "Please enter your password",
                       border: InputBorder.none,
                       contentPadding: EdgeInsetsGeometry.lerp(
-                          EdgeInsets.all(10), EdgeInsets.all(10), 0.0),
+                          const EdgeInsets.all(10),
+                          const EdgeInsets.all(10),
+                          0.0),
                     ),
                     onChanged: (value) {
                       password1 = value.toString();
@@ -140,7 +144,7 @@ class _RegistratioPageState extends State<RegistratioPage> {
                 ),
                 Container(
                   height: h3.toDouble(),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Color.fromARGB(255, 219, 219, 219),
                       borderRadius: BorderRadius.all(Radius.circular(10))),
                   child: TextFormField(
@@ -149,7 +153,9 @@ class _RegistratioPageState extends State<RegistratioPage> {
                       hintText: "Please re-enter your password",
                       border: InputBorder.none,
                       contentPadding: EdgeInsetsGeometry.lerp(
-                          EdgeInsets.all(10), EdgeInsets.all(10), 0.0),
+                          const EdgeInsets.all(10),
+                          const EdgeInsets.all(10),
+                          0.0),
                     ),
                     onChanged: (value) {
                       password2 = value.toString();
@@ -203,10 +209,10 @@ class _RegistratioPageState extends State<RegistratioPage> {
                   child: Container(
                     height: 50,
                     width: double.infinity,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: Color.fromARGB(255, 148, 31, 31),
                         borderRadius: BorderRadius.all(Radius.circular(10))),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         "Register",
                         style: TextStyle(

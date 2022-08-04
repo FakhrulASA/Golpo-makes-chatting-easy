@@ -1,8 +1,5 @@
 import 'package:chat_time/model/NetworkRequestModel.dart';
-import 'package:chat_time/util/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 Future<NetworkRequestModel> registerUserWithEmailAndPassword(
     String email, String password) async {
@@ -29,7 +26,6 @@ Future<NetworkRequestModel> registerUserWithEmailAndPassword(
       message = e.code;
     }
   } catch (e) {
-    print(e);
     isSuccess = false;
     message = e.toString();
   }
