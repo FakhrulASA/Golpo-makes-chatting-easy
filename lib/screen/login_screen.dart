@@ -4,6 +4,8 @@ import 'package:chat_time/util/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../util/ProgressUtil.dart';
+
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
 
@@ -68,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Container(
                     height: h1.toDouble(),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: Color.fromARGB(255, 255, 217, 147),
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     child: TextFormField(
@@ -101,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Container(
                   height: h2.toDouble(),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Color.fromARGB(255, 219, 219, 219),
                       borderRadius: BorderRadius.all(Radius.circular(10))),
                   child: TextFormField(
@@ -110,7 +112,9 @@ class _LoginPageState extends State<LoginPage> {
                       hintText: "Please enter your password",
                       border: InputBorder.none,
                       contentPadding: EdgeInsetsGeometry.lerp(
-                          EdgeInsets.all(10), EdgeInsets.all(10), 0.0),
+                          const EdgeInsets.all(10),
+                          const EdgeInsets.all(10),
+                          0.0),
                     ),
                     validator: (String? value) {
                       if (value!.isEmpty) {
@@ -136,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 15,
                 ),
                 Row(
-                  children: [
+                  children: const [
                     Text("Forgot password?  ",
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w200)),
@@ -152,6 +156,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 InkWell(
                   onTap: () {
+                    showLoaderDialog(context, "Login in, please wait!");
                     final isvalid = _formKey.currentState!.validate();
                     if (isvalid) {
                       _formKey.currentState!.save();
@@ -159,6 +164,7 @@ class _LoginPageState extends State<LoginPage> {
                           .then((value) {
                         if (value.success) {
                           Fluttertoast.showToast(msg: value.message);
+                          Navigator.pop(context);
                         } else {
                           Fluttertoast.showToast(msg: value.message);
                         }
@@ -168,10 +174,10 @@ class _LoginPageState extends State<LoginPage> {
                   child: Container(
                     height: 50,
                     width: double.infinity,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: Color.fromARGB(255, 148, 31, 31),
                         borderRadius: BorderRadius.all(Radius.circular(10))),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         "Login",
                         style: TextStyle(
