@@ -1,6 +1,8 @@
 import 'dart:ffi';
+import 'package:chat_time/network/auth.dart';
 import 'package:chat_time/util/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -14,6 +16,8 @@ class _LoginPageState extends State<LoginPage> {
   var h1 = 50;
   var h2 = 50;
   loginUser() {}
+  var email = "";
+  var password = "";
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -88,6 +92,9 @@ class _LoginPageState extends State<LoginPage> {
                         }
                         return null;
                       },
+                      onChanged: (value) {
+                        email = value;
+                      },
                     )),
                 const SizedBox(
                   height: 20,
@@ -120,6 +127,9 @@ class _LoginPageState extends State<LoginPage> {
                       }
                       return null;
                     },
+                    onChanged: (value) {
+                      password = value;
+                    },
                   ),
                 ),
                 const SizedBox(
@@ -145,6 +155,14 @@ class _LoginPageState extends State<LoginPage> {
                     final isvalid = _formKey.currentState!.validate();
                     if (isvalid) {
                       _formKey.currentState!.save();
+                      registerUserWithEmailAndPassword(email, password)
+                          .then((value) {
+                        if (value.success) {
+                          Fluttertoast.showToast(msg: value.message);
+                        } else {
+                          Fluttertoast.showToast(msg: value.message);
+                        }
+                      });
                     }
                   },
                   child: Container(

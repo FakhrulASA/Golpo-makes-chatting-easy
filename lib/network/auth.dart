@@ -1,29 +1,65 @@
+import 'package:chat_time/model/NetworkRequestModel.dart';
+import 'package:chat_time/util/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-registerUserWithEmailAndPassword(String email, String password) async {
+Future<NetworkRequestModel> registerUserWithEmailAndPassword(
+    String email, String password) async {
+  UserCredential userCredential;
+  bool isSuccess;
+  String message;
   try {
-    UserCredential userCredential = await FirebaseAuth.instance
+    userCredential = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password);
+    if (userCredential.user?.email != null) {
+      isSuccess = true;
+      message = "Succeesfully logged in";
+    } else {
+      isSuccess = false;
+      message = "Error occurred!";
+    }
   } on FirebaseAuthException catch (e) {
+    isSuccess = false;
     if (e.code == 'weak-password') {
-      print('The password provided is too weak.');
+      message = "The password provided is too weak.";
     } else if (e.code == 'email-already-in-use') {
-      print('The account already exists for that email.');
+      message = "The account already exists for that email.";
+    } else {
+      message = e.code;
     }
   } catch (e) {
     print(e);
+    isSuccess = false;
+    message = e.toString();
   }
+  return NetworkRequestModel(isSuccess, message);
 }
 
-loginUserWithEmailAndPassword(String email, String password) async {
+Future<NetworkRequestModel> loginUserWithEmailAndPassword(
+    String email, String password) async {
+  bool isSuccess;
+  String message;
+  UserCredential userCredential;
   try {
-    UserCredential userCredential = await FirebaseAuth.instance
+    userCredential = await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password);
+    if (userCredential.user?.email != null) {
+      isSuccess = true;
+      message = "Succeesfully logged in";
+    } else {
+      isSuccess = false;
+      message = "Error occurred!";
+    }
   } on FirebaseAuthException catch (e) {
+    isSuccess = false;
     if (e.code == 'user-not-found') {
-      print('No user found for that email.');
+      message = 'No user found for that email.';
     } else if (e.code == 'wrong-password') {
-      print('Wrong password provided for that user.');
+      message = 'Wrong password provided for that user.';
+    } else {
+      message = e.code;
     }
   }
+  return NetworkRequestModel(isSuccess, message);
 }
