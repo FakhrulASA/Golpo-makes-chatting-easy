@@ -33,17 +33,18 @@ class _MyAppState extends State<MyApp> {
       initialRoute = ApplicationRoute.loginRoute;
     }
 
-    log("ROUTE: " + initialRoute);
+    log("ROUTE: $initialRoute");
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
       initialRoute: initialRoute,
       routes: {
+        // ignore: prefer_const_constructors
         ApplicationRoute.registrationRoute: (context) => RegistratioPage(),
-        ApplicationRoute.chartlistRoute: (context) => ChatListPage(),
-        ApplicationRoute.loginRoute: (context) => LoginPage(),
-        ApplicationRoute.messageDetailRoute: (context) => MessagePage()
+        ApplicationRoute.chartlistRoute: (context) => const ChatListPage(),
+        ApplicationRoute.loginRoute: (context) => const LoginPage(),
+        ApplicationRoute.messageDetailRoute: (context) => const MessagePage()
       },
     );
   }
