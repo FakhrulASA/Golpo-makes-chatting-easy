@@ -63,7 +63,7 @@ class _ChatListPageState extends State<ChatListPage> {
                 hintText: "Search here",
                 hintStyle: TextStyle(fontWeight: FontWeight.w200)),
           ),
-          Expanded(
+          Flexible(
             child: ListView.builder(
                 itemCount: 20,
                 scrollDirection: Axis.vertical,
