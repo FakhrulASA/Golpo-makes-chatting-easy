@@ -1,5 +1,4 @@
 import 'package:chat_time/util/ProgressUtil.dart';
-import 'package:chat_time/util/color.dart';
 import 'package:flutter/material.dart';
 
 class ChatListPage extends StatefulWidget {
@@ -40,11 +39,7 @@ class _ChatListPageState extends State<ChatListPage> {
             leading: const Icon(Icons.settings),
             title: const Text('Log out'),
             onTap: () {
-              showCommonDialog(
-                  context,
-                  "Do you really want to log out from the application?",
-                  "No",
-                  "Yes");
+              showCommonDialog(context);
             },
           ),
         ],
@@ -54,7 +49,20 @@ class _ChatListPageState extends State<ChatListPage> {
         backgroundColor: const Color.fromARGB(255, 36, 36, 36),
       ),
       body: Column(
-        children: const [],
+        children: const [
+          TextField(
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
+            decoration: InputDecoration(
+                suffixIcon: Icon(
+                  Icons.search_rounded,
+                  size: 26,
+                ),
+                contentPadding: EdgeInsets.fromLTRB(12, 12, 12, 12),
+                isDense: true,
+                hintText: "Search here",
+                hintStyle: TextStyle(fontWeight: FontWeight.w200)),
+          ),
+        ],
       ),
     );
   }

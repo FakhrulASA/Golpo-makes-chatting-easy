@@ -59,3 +59,7 @@ Future<NetworkRequestModel> loginUserWithEmailAndPassword(
   }
   return NetworkRequestModel(isSuccess, message);
 }
+
+Future<void> signOut() async {
+  await FirebaseAuth.instance.signOut();
+}
