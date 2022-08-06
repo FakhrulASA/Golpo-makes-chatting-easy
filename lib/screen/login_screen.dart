@@ -169,6 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                               context, ApplicationRoute.chartlistRoute);
                         } else {
                           Fluttertoast.showToast(msg: value.message);
+                          Navigator.pop(context);
                         }
                       });
                     }

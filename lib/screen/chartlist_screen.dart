@@ -78,21 +78,47 @@ class _ChatListPageState extends State<ChatListPage> {
   }
 
   Widget getRow(int i) {
-    return GestureDetector(
-      child: Row(
-        children: [
-          CircleAvatar(
-              radius: (40),
-              backgroundColor: Colors.white,
-              child: Image.asset("assets/login.png")),
-          Column(
-            children: [Text("Title"), Text("Message")],
-          )
-        ],
-      ),
+    return InkWell(
       onTap: () {
         Navigator.pushNamed(context, ApplicationRoute.messageDetailRoute);
       },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CircleAvatar(
+              radius: (30),
+              backgroundColor: Colors.white,
+              child: Image.asset("assets/login.png")),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                  child: Text(
+                    "User User",
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: Text(
+                    "Message Message Message Message Message Message Message Message Message Message Message Message MMessage Message MMessage Message Message Message Message Message Message Message ",
+                    textAlign: TextAlign.start,
+                    softWrap: false,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }

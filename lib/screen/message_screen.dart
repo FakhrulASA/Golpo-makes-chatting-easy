@@ -66,7 +66,7 @@ class _MessagePageState extends State<MessagePage> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
                       ],
@@ -77,7 +77,7 @@ class _MessagePageState extends State<MessagePage> {
               IconButton(
                 color: Colors.black26,
                 iconSize: 30,
-                icon: Icon(
+                icon: const Icon(
                   Icons.attachment,
                 ),
                 onPressed: () {},
@@ -85,7 +85,7 @@ class _MessagePageState extends State<MessagePage> {
               IconButton(
                 color: Colors.black26,
                 iconSize: 30,
-                icon: Icon(
+                icon: const Icon(
                   Icons.image,
                 ),
                 onPressed: () {},
@@ -93,7 +93,7 @@ class _MessagePageState extends State<MessagePage> {
               IconButton(
                 color: primaryColor,
                 iconSize: 30,
-                icon: Icon(
+                icon: const Icon(
                   Icons.send_rounded,
                 ),
                 onPressed: () {},
@@ -109,12 +109,14 @@ class _MessagePageState extends State<MessagePage> {
     return GestureDetector(
       child: Row(
         children: [
-          CircleAvatar(
-              radius: (40),
-              backgroundColor: Colors.white,
-              child: Image.asset("assets/login.png")),
           Column(
-            children: [Text("Title"), Text("Message")],
+            children: const [
+              Text(
+                "Fakhrul",
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+              ),
+              Text("Message")
+            ],
           )
         ],
       ),
@@ -129,7 +131,7 @@ class _MessagePageState extends State<MessagePage> {
       child: Row(
         children: [
           Column(
-            children: [Text("Title"), Text("Message")],
+            children: const [Text("Tit1le"), Text("Message")],
           ),
           CircleAvatar(
               radius: (40),
