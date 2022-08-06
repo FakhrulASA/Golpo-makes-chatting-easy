@@ -1,4 +1,5 @@
 import 'package:chat_time/util/ProgressUtil.dart';
+import 'package:chat_time/util/routes.dart';
 import 'package:flutter/material.dart';
 
 class ChatListPage extends StatefulWidget {
@@ -49,8 +50,8 @@ class _ChatListPageState extends State<ChatListPage> {
         backgroundColor: const Color.fromARGB(255, 36, 36, 36),
       ),
       body: Column(
-        children: const [
-          TextField(
+        children: [
+          const TextField(
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
             decoration: InputDecoration(
                 suffixIcon: Icon(
@@ -62,8 +63,36 @@ class _ChatListPageState extends State<ChatListPage> {
                 hintText: "Search here",
                 hintStyle: TextStyle(fontWeight: FontWeight.w200)),
           ),
+          Expanded(
+            child: ListView.builder(
+                itemCount: 20,
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemBuilder: (BuildContext context, int position) {
+                  return getRow(position);
+                }),
+          )
         ],
       ),
+    );
+  }
+
+  Widget getRow(int i) {
+    return GestureDetector(
+      child: Row(
+        children: [
+          CircleAvatar(
+              radius: (40),
+              backgroundColor: Colors.white,
+              child: Image.asset("assets/login.png")),
+          Column(
+            children: [Text("Title"), Text("Message")],
+          )
+        ],
+      ),
+      onTap: () {
+        Navigator.pushNamed(context, ApplicationRoute.messageDetailRoute);
+      },
     );
   }
 }
