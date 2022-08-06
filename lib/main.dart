@@ -8,7 +8,7 @@ import 'package:chat_time/util/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-import 'network/user_state.dart';
+import 'network/auth/user_state.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,17 +33,18 @@ class _MyAppState extends State<MyApp> {
       initialRoute = ApplicationRoute.loginRoute;
     }
 
-    log("ROUTE: " + initialRoute);
+    log("ROUTE: $initialRoute");
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
       initialRoute: initialRoute,
       routes: {
+        // ignore: prefer_const_constructors
         ApplicationRoute.registrationRoute: (context) => RegistratioPage(),
-        ApplicationRoute.chartlistRoute: (context) => ChatListPage(),
-        ApplicationRoute.loginRoute: (context) => LoginPage(),
-        ApplicationRoute.messageDetailRoute: (context) => MessagePage()
+        ApplicationRoute.chartlistRoute: (context) => const ChatListPage(),
+        ApplicationRoute.loginRoute: (context) => const LoginPage(),
+        ApplicationRoute.messageDetailRoute: (context) => const MessagePage()
       },
     );
   }
