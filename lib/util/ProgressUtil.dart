@@ -4,7 +4,7 @@ import 'package:chat_time/component/common_button.dart';
 import 'package:chat_time/util/routes.dart';
 import 'package:flutter/material.dart';
 
-import '../network/auth.dart';
+import '../network/auth/auth.dart';
 
 showLoaderDialog(BuildContext context, String message) {
   AlertDialog alert = AlertDialog(

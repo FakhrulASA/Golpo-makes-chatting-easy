@@ -2,7 +2,7 @@ import 'package:chat_time/util/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../network/auth.dart';
+import '../network/auth/auth.dart';
 import '../util/ProgressUtil.dart';
 
 class RegistratioPage extends StatefulWidget {

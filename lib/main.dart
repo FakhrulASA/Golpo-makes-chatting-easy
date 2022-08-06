@@ -8,7 +8,7 @@ import 'package:chat_time/util/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-import 'network/user_state.dart';
+import 'network/auth/user_state.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
