@@ -24,10 +24,10 @@ Widget getMessageListItem(BuildContext context, int i) {
               width: 12,
             ),
             CircleAvatar(
-              radius: 26,
+              radius: 30,
               backgroundColor: const Color.fromARGB(255, 0, 172, 6),
               child: CircleAvatar(
-                  radius: isOnline ? 22 : 26,
+                  radius: isOnline ? 27 : 30,
                   backgroundColor: Colors.white,
                   backgroundImage: const AssetImage("assets/avatar.png")),
             ),

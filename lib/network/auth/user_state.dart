@@ -10,3 +10,7 @@ bool getUserState() {
     return false;
   }
 }
+
+String? getUserEmail() {
+  return FirebaseAuth.instance.currentUser!.email;
+}

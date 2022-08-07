@@ -3,7 +3,9 @@ import 'dart:developer';
 import 'package:chat_time/screen/chartlist_screen.dart';
 import 'package:chat_time/screen/login_screen.dart';
 import 'package:chat_time/screen/message_screen.dart';
+import 'package:chat_time/screen/profile_screen.dart';
 import 'package:chat_time/screen/registration_screen.dart';
+import 'package:chat_time/screen/setting_screen.dart';
 import 'package:chat_time/util/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -44,7 +46,9 @@ class _MyAppState extends State<MyApp> {
         ApplicationRoute.registrationRoute: (context) => RegistratioPage(),
         ApplicationRoute.chartlistRoute: (context) => const ChatListPage(),
         ApplicationRoute.loginRoute: (context) => const LoginPage(),
-        ApplicationRoute.messageDetailRoute: (context) => const MessagePage()
+        ApplicationRoute.messageDetailRoute: (context) => const MessagePage(),
+        ApplicationRoute.profileRoute: (context) => const ProfileScreen(),
+        ApplicationRoute.settingsRote: (context) => const SettingScreen()
       },
     );
   }
