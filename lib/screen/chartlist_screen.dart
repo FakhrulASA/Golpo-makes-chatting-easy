@@ -42,7 +42,7 @@ class _ChatListPageState extends State<ChatListPage> {
     final imageUrl = await imagesRef.getDownloadURL();
     if (imageUrl.isNotEmpty) {
       imageUrlPhoto = imageUrl;
-      // always st setstae while working with network image
+      // always st setstae while working with network ima
       setState(() {});
       log(imageUrlPhoto);
     }
@@ -78,7 +78,8 @@ class _ChatListPageState extends State<ChatListPage> {
                       child: CircleAvatar(
                           radius: 30,
                           backgroundColor: Colors.white,
-                          backgroundImage: NetworkImage(imageUrlPhoto)),
+                          backgroundImage: AssetImage("assets/placeholder.jpg"),
+                          foregroundImage: NetworkImage(imageUrlPhoto)),
                     ),
                   ),
                   const SizedBox(
