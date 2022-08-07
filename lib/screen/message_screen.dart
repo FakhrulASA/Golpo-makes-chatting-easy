@@ -2,8 +2,6 @@ import 'package:chat_time/component/message_item_component.dart';
 import 'package:chat_time/util/color.dart';
 import 'package:flutter/material.dart';
 
-import '../util/routes.dart';
-
 class MessagePage extends StatefulWidget {
   const MessagePage({Key? key}) : super(key: key);
 
@@ -13,6 +11,7 @@ class MessagePage extends StatefulWidget {
 
 class _MessagePageState extends State<MessagePage> {
   var a = 1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +33,7 @@ class _MessagePageState extends State<MessagePage> {
                 itemBuilder: (BuildContext context, int position) {
                   return Column(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       position % 2 == 0
