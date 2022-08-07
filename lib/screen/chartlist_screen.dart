@@ -1,5 +1,6 @@
 import 'package:chat_time/component/message_list_component.dart';
 import 'package:chat_time/util/ProgressUtil.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ChatListPage extends StatefulWidget {
@@ -10,6 +11,7 @@ class ChatListPage extends StatefulWidget {
 }
 
 class _ChatListPageState extends State<ChatListPage> {
+  var name = FirebaseAuth.instance.currentUser!.email;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,12 +21,35 @@ class _ChatListPageState extends State<ChatListPage> {
           DrawerHeader(
               decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 36, 36, 36),
-                image: DecorationImage(
-                    image: AssetImage("assets/login.png"),
-                    fit: BoxFit.scaleDown),
               ),
               child: Column(
-                children: const [Text("dasdas")],
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const CircleAvatar(
+                    radius: 33,
+                    backgroundColor: Colors.white,
+                    child: CircleAvatar(
+                        radius: 30,
+                        backgroundColor: Colors.white,
+                        backgroundImage: AssetImage("assets/avatar.png")),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  //These can go here or below the header with the same background color
+                  Text(name!.split("@")[0],
+                      style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500)), //customize this text
+                  Text(name!,
+                      style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400)),
+                  //...additional header items here
+                ],
               )),
           ListTile(
             leading: const Icon(Icons.message),
