@@ -1,7 +1,9 @@
 import 'package:chat_time/component/message_list_component.dart';
 import 'package:chat_time/util/ProgressUtil.dart';
+import 'package:chat_time/util/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ChatListPage extends StatefulWidget {
   const ChatListPage({Key? key}) : super(key: key);
@@ -26,13 +28,20 @@ class _ChatListPageState extends State<ChatListPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const CircleAvatar(
-                    radius: 33,
-                    backgroundColor: Colors.white,
-                    child: CircleAvatar(
-                        radius: 30,
-                        backgroundColor: Colors.white,
-                        backgroundImage: AssetImage("assets/avatar.png")),
+                  InkWell(
+                    onTap: () async {
+                      final ImagePicker _picker = ImagePicker();
+                      final img =
+                          await _picker.pickImage(source: ImageSource.gallery);
+                    },
+                    child: const CircleAvatar(
+                      radius: 33,
+                      backgroundColor: Colors.white,
+                      child: CircleAvatar(
+                          radius: 30,
+                          backgroundColor: Colors.white,
+                          backgroundImage: AssetImage("assets/avatar.png")),
+                    ),
                   ),
                   const SizedBox(
                     height: 20,
@@ -54,12 +63,16 @@ class _ChatListPageState extends State<ChatListPage> {
           ListTile(
             leading: const Icon(Icons.message),
             title: const Text('Profile'),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, ApplicationRoute.profileRoute);
+            },
           ),
           ListTile(
             leading: const Icon(Icons.account_circle),
             title: const Text('Settings'),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, ApplicationRoute.settingsRote);
+            },
           ),
           ListTile(
             leading: const Icon(Icons.settings),

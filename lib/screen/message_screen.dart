@@ -1,6 +1,7 @@
 import 'package:chat_time/component/message_item_component.dart';
 import 'package:chat_time/util/color.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class MessagePage extends StatefulWidget {
   const MessagePage({Key? key}) : super(key: key);
@@ -34,7 +35,7 @@ class _MessagePageState extends State<MessagePage> {
                   return Column(
                     children: [
                       const SizedBox(
-                        height: 5,
+                        height: 10,
                       ),
                       position % 2 == 0
                           ? getMessageDetailItemSender(context, position)
@@ -92,7 +93,11 @@ class _MessagePageState extends State<MessagePage> {
                 icon: const Icon(
                   Icons.image,
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  final ImagePicker _picker = ImagePicker();
+                  final img =
+                      await _picker.pickImage(source: ImageSource.gallery);
+                },
               ),
               IconButton(
                 color: primaryColor,
