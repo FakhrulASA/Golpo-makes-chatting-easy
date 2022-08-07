@@ -1,3 +1,4 @@
+import 'package:chat_time/component/message_item_component.dart';
 import 'package:chat_time/util/color.dart';
 import 'package:flutter/material.dart';
 
@@ -26,17 +27,21 @@ class _MessagePageState extends State<MessagePage> {
         children: [
           Flexible(
             child: ListView.builder(
-                itemCount: 2,
+                itemCount: 20,
                 scrollDirection: Axis.vertical,
                 reverse: true,
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, int position) {
-                  if (a == 1) {
-                    a = 1;
-                    return getRow(position);
-                  } else {
-                    return getRowRed(position);
-                  }
+                  return Column(
+                    children: [
+                      SizedBox(
+                        height: 5,
+                      ),
+                      position % 2 == 0
+                          ? getMessageDetailItemSender(context, position)
+                          : getMessageDetailItemReceiver(context, position)
+                    ],
+                  );
                 }),
           ),
           Row(
@@ -102,46 +107,6 @@ class _MessagePageState extends State<MessagePage> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget getRow(int i) {
-    return GestureDetector(
-      child: Row(
-        children: [
-          Column(
-            children: const [
-              Text(
-                "Fakhrul",
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
-              ),
-              Text("Message")
-            ],
-          )
-        ],
-      ),
-      onTap: () {
-        Navigator.pushNamed(context, ApplicationRoute.messageDetailRoute);
-      },
-    );
-  }
-
-  Widget getRowRed(int i) {
-    return GestureDetector(
-      child: Row(
-        children: [
-          Column(
-            children: const [Text("Tit1le"), Text("Message")],
-          ),
-          CircleAvatar(
-              radius: (40),
-              backgroundColor: Colors.white,
-              child: Image.asset("assets/login.png")),
-        ],
-      ),
-      onTap: () {
-        Navigator.pushNamed(context, ApplicationRoute.messageDetailRoute);
-      },
     );
   }
 }

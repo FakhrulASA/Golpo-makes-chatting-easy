@@ -1,6 +1,5 @@
 import 'package:chat_time/component/message_list_component.dart';
 import 'package:chat_time/util/ProgressUtil.dart';
-import 'package:chat_time/util/routes.dart';
 import 'package:flutter/material.dart';
 
 class ChatListPage extends StatefulWidget {
