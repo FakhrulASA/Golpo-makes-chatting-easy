@@ -1,9 +1,17 @@
+import 'dart:developer';
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:chat_time/component/message_list_component.dart';
 import 'package:chat_time/util/ProgressUtil.dart';
 import 'package:chat_time/util/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../network/auth/user_state.dart';
 
 class ChatListPage extends StatefulWidget {
   const ChatListPage({Key? key}) : super(key: key);
@@ -14,8 +22,35 @@ class ChatListPage extends StatefulWidget {
 
 class _ChatListPageState extends State<ChatListPage> {
   var name = FirebaseAuth.instance.currentUser!.email;
+  final storageRef = FirebaseStorage.instance.ref();
+  String imageUrlPhoto = "";
+  final imagesRef = FirebaseStorage.instance
+      .ref()
+      .child("images/${getUserEmail()!.split("@")[0]}");
+
+  final storage = FirebaseStorage.instance;
+  Uint8List? bytes;
+  storeInFirebase(File dataUrl) async {
+    try {
+      await imagesRef.putFile(dataUrl);
+    } on FirebaseException catch (e) {
+      log(e.message.toString());
+    }
+  }
+
+  getDataFromFirebase() async {
+    final imageUrl = await imagesRef.getDownloadURL();
+    if (imageUrl.isNotEmpty) {
+      imageUrlPhoto = imageUrl;
+      // always st setstae while working with network image
+      setState(() {});
+      log(imageUrlPhoto);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    getDataFromFirebase();
     return Scaffold(
       drawer: Drawer(
           child: ListView(
@@ -30,17 +65,20 @@ class _ChatListPageState extends State<ChatListPage> {
                 children: [
                   InkWell(
                     onTap: () async {
-                      final ImagePicker _picker = ImagePicker();
+                      final ImagePicker picker = ImagePicker();
                       final img =
-                          await _picker.pickImage(source: ImageSource.gallery);
+                          await picker.pickImage(source: ImageSource.gallery);
+                      if (img != null) {
+                        storeInFirebase(File(img.path));
+                      }
                     },
-                    child: const CircleAvatar(
+                    child: CircleAvatar(
                       radius: 33,
                       backgroundColor: Colors.white,
                       child: CircleAvatar(
                           radius: 30,
                           backgroundColor: Colors.white,
-                          backgroundImage: AssetImage("assets/avatar.png")),
+                          backgroundImage: NetworkImage(imageUrlPhoto)),
                     ),
                   ),
                   const SizedBox(
