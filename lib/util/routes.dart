@@ -3,7 +3,7 @@ class ApplicationRoute {
   static String registrationRoute = "/registration";
   static String chartlistRoute = "/chatlist";
   static String messageDetailRoute = "/message";
-
+  static String addFriendRoute = "/friend";
   static String profileRoute = "/profile";
   static String settingsRote = "/settings";
 }

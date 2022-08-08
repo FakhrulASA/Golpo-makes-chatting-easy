@@ -22,7 +22,6 @@ class ChatListPage extends StatefulWidget {
 
 class _ChatListPageState extends State<ChatListPage> {
   var name = FirebaseAuth.instance.currentUser!.email;
-  final storageRef = FirebaseStorage.instance.ref();
   String imageUrlPhoto = "";
   final imagesRef = FirebaseStorage.instance
       .ref()
@@ -125,6 +124,16 @@ class _ChatListPageState extends State<ChatListPage> {
       appBar: AppBar(
         title: const Text("Messages"),
         backgroundColor: const Color.fromARGB(255, 36, 36, 36),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            tooltip: 'Add a chat',
+            onPressed: () {
+              // handle the press
+              Navigator.pushNamed(context, ApplicationRoute.addFriendRoute);
+            },
+          ),
+        ],
       ),
       body: Column(
         children: [

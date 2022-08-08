@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:chat_time/component/common_button.dart';
 import 'package:chat_time/util/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../network/auth/auth.dart';
 
@@ -57,9 +58,7 @@ showCommonDialog(BuildContext context) {
             children: [
               Flexible(
                 child: InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
+                  onTap: () {},
                   child: Container(
                     height: 50,
                     width: double.infinity,
@@ -87,12 +86,17 @@ showCommonDialog(BuildContext context) {
                     FutureBuilder(
                       future: signOut(),
                       builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          Navigator.pushReplacementNamed(
+                              context, ApplicationRoute.loginRoute);
+                        }
                         switch (snapshot.connectionState) {
                           case ConnectionState.waiting:
                             {
                               return showLoaderDialog(
                                   context, "Login out, please wait!");
                             }
+
                           default:
                             {
                               if (snapshot.hasError) {
@@ -104,8 +108,6 @@ showCommonDialog(BuildContext context) {
                         }
                       },
                     );
-                    Navigator.pushReplacementNamed(
-                        context, ApplicationRoute.loginRoute);
                   },
                   child: Container(
                     height: 50,
