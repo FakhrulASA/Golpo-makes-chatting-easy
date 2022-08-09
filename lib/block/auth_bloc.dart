@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:chat_time/event/auth_event.dart';
 import 'package:chat_time/model/user.dart';
@@ -33,7 +32,11 @@ class AuthBloc {
         Navigator.pop(contextA!);
         Navigator.pushReplacementNamed(contextA, ApplicationRoute.loginRoute);
       } else if (event == AuthEvent.registration) {
-        registerUserWithEmailAndPassword(user!.email, user.password);
+        registerUserWithEmailAndPassword(user!.email, user.password)
+            .then((value) {
+          _authSink.add(value);
+          _authSink.done;
+        });
       } else if (event == AuthEvent.forgetPassword) {}
     });
   }
