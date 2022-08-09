@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:chat_time/screen/add_friend_screen.dart';
 import 'package:chat_time/screen/chartlist_screen.dart';
 import 'package:chat_time/screen/login_screen.dart';
 import 'package:chat_time/screen/message_screen.dart';
@@ -48,7 +49,8 @@ class _MyAppState extends State<MyApp> {
         ApplicationRoute.loginRoute: (context) => const LoginPage(),
         ApplicationRoute.messageDetailRoute: (context) => const MessagePage(),
         ApplicationRoute.profileRoute: (context) => const ProfileScreen(),
-        ApplicationRoute.settingsRote: (context) => const SettingScreen()
+        ApplicationRoute.settingsRote: (context) => const SettingScreen(),
+        ApplicationRoute.addFriendRoute: (context) => const AddFriendScreen()
       },
     );
   }

@@ -1,5 +1,8 @@
 import 'package:chat_time/model/NetworkRequestModel.dart';
+import 'package:chat_time/network/auth/user_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 Future<NetworkRequestModel> registerUserWithEmailAndPassword(
     String email, String password) async {
@@ -62,4 +65,20 @@ Future<NetworkRequestModel> loginUserWithEmailAndPassword(
 
 Future<void> signOut() async {
   await FirebaseAuth.instance.signOut();
+}
+
+String getUserName() {
+  return FirebaseAuth.instance.currentUser!.email!.split("@")[0];
+}
+
+Future<String?> getUserImageUrl() async {
+  final imagesRef = FirebaseStorage.instance
+      .ref()
+      .child("images/${getUserEmail()!.split("@")[0]}");
+  final imageUrl = await imagesRef.getDownloadURL();
+  if (imageUrl.isNotEmpty) {
+    return imageUrl;
+  } else {
+    return null;
+  }
 }

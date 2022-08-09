@@ -1,17 +1,20 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class ChatListModel {
-  String message = "";
-  String time = "";
-  bool isRead = false;
-  String name = "";
-  String image = "";
+  String? message = "";
+  bool? isRead = false;
+  String? name = "";
+  String? image = "";
+  String? sender = "";
+  String? receiver = "";
   ChatListModel({
-    required this.message,
-    required this.time,
-    required this.isRead,
-    required this.name,
-    required this.image,
+    this.message,
+    this.isRead,
+    this.name,
+    this.image,
+    this.sender,
+    this.receiver,
   });
 
   ChatListModel copyWith({
@@ -20,33 +23,38 @@ class ChatListModel {
     bool? isRead,
     String? name,
     String? image,
+    String? sender,
+    String? receiver,
   }) {
     return ChatListModel(
       message: message ?? this.message,
-      time: time ?? this.time,
       isRead: isRead ?? this.isRead,
       name: name ?? this.name,
       image: image ?? this.image,
+      sender: sender ?? this.sender,
+      receiver: receiver ?? this.receiver,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'message': message,
-      'time': time,
       'isRead': isRead,
       'name': name,
       'image': image,
+      'sender': sender,
+      'receiver': receiver,
     };
   }
 
   factory ChatListModel.fromMap(Map<String, dynamic> map) {
     return ChatListModel(
       message: map['message'] as String,
-      time: map['time'] as String,
       isRead: map['isRead'] as bool,
       name: map['name'] as String,
       image: map['image'] as String,
+      sender: map['sender'] as String,
+      receiver: map['receiver'] as String,
     );
   }
 
@@ -57,7 +65,7 @@ class ChatListModel {
 
   @override
   String toString() {
-    return 'ChatListModel(message: $message, time: $time, isRead: $isRead, name: $name, image: $image)';
+    return 'ChatListModel(message: $message,  isRead: $isRead, name: $name, image: $image, sender: $sender, receiver: $receiver)';
   }
 
   @override
@@ -65,18 +73,20 @@ class ChatListModel {
     if (identical(this, other)) return true;
 
     return other.message == message &&
-        other.time == time &&
         other.isRead == isRead &&
         other.name == name &&
-        other.image == image;
+        other.image == image &&
+        other.sender == sender &&
+        other.receiver == receiver;
   }
 
   @override
   int get hashCode {
     return message.hashCode ^
-        time.hashCode ^
         isRead.hashCode ^
         name.hashCode ^
-        image.hashCode;
+        image.hashCode ^
+        sender.hashCode ^
+        receiver.hashCode;
   }
 }
