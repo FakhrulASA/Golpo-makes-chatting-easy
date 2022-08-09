@@ -1,16 +1,11 @@
-# chat_time
+# Golpo - A BLoC architecture flutter project
 
-A new Flutter project.
+## Here the list of used technical stacks,
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. BLoC architecture
+2. OOP Prinicple
+3. Grid and List view 
+4. Firestore
+5. Firebase Auth
+6. Firebase Storage
+7. Vibration 
