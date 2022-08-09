@@ -1,7 +1,10 @@
+import 'package:chat_time/block/auth_bloc.dart';
+import 'package:chat_time/event/auth_event.dart';
+import 'package:chat_time/model/user.dart';
 import 'package:chat_time/util/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
+import '../model/user.dart';
 import '../network/auth/auth.dart';
 import '../util/ProgressUtil.dart';
 
@@ -17,9 +20,11 @@ class _RegistratioPageState extends State<RegistratioPage> {
   var h1 = 50;
   var h2 = 50;
   var h3 = 50;
+  var h4 = 50;
   var email = "";
   var password1 = "";
   var password2 = "";
+  var name = "";
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -103,11 +108,8 @@ class _RegistratioPageState extends State<RegistratioPage> {
                 const SizedBox(
                   height: 20,
                 ),
-                SizedBox(
-                  height: 20,
-                ),
                 Container(
-                    height: h1.toDouble(),
+                    height: h4.toDouble(),
                     decoration: const BoxDecoration(
                         color: Color.fromARGB(255, 255, 217, 147),
                         borderRadius: BorderRadius.all(Radius.circular(10))),
@@ -121,21 +123,21 @@ class _RegistratioPageState extends State<RegistratioPage> {
                               0.0)),
                       validator: (String? value) {
                         if (value!.isEmpty) {
-                          h1 = 80;
+                          h4 = 80;
                           setState(() {});
                           return "Name cannot be empty";
                         } else if (value.length < 2) {
-                          h1 = 80;
+                          h4 = 80;
                           setState(() {});
                           return "Please enter valid Name";
                         } else {
-                          h1 = 50;
+                          h4 = 50;
                           setState(() {});
                         }
                         return null;
                       },
                       onChanged: (value) {
-                        email = value;
+                        name = value;
                       },
                     )),
                 const SizedBox(
@@ -227,21 +229,29 @@ class _RegistratioPageState extends State<RegistratioPage> {
                   onTap: () {
                     final isvalid = _formKey.currentState!.validate();
                     if (isvalid) {
+                      _formKey.currentState!.save();
                       showLoaderDialog(
                           context, "Registering you, please wait!");
-                      _formKey.currentState!.save();
-                      registerUserWithEmailAndPassword(email, password1)
-                          .then((value) {
-                        if (value.success) {
-                          Fluttertoast.showToast(msg: value.message);
-                          Navigator.pop(context);
-                          Navigator.pushReplacementNamed(
-                              context, ApplicationRoute.loginRoute);
-                        } else {
-                          Fluttertoast.showToast(msg: value.message);
-                          Navigator.pop(context);
-                        }
-                      });
+                      final authBloc = AuthBloc(
+                          context,
+                          AppUser(
+                              userName: name,
+                              password: password1,
+                              email: email));
+                      authBloc.authEventSink.add(AuthEvent.registration);
+                      authBloc.authStream.listen(
+                        (event) {
+                          if (event.success) {
+                            Fluttertoast.showToast(msg: event.message);
+                            Navigator.pop(context);
+                            Navigator.pushReplacementNamed(
+                                context, ApplicationRoute.loginRoute);
+                          } else {
+                            Fluttertoast.showToast(msg: event.message);
+                            Navigator.pop(context);
+                          }
+                        },
+                      );
                     }
                   },
                   child: Container(

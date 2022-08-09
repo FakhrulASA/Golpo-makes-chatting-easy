@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:chat_time/event/message_event_enum.dart';
 import 'package:flutter/material.dart';
 
@@ -113,10 +115,9 @@ Widget getFriendAddItem(BuildContext context, int i) {
             receiver: "babuka@asfa.com",
             name: getUserName()));
         messageBlock.messageEventSink.add(MessageEvent.message);
-        StreamBuilder<ChatListModel>(
-          stream: messageBlock.messageStream,
-          builder: (context, snapshot) {
-            return Text(snapshot.data!.message!);
+        messageBlock.messageStream.listen(
+          (event) {
+            log(event.message!);
           },
         );
       },

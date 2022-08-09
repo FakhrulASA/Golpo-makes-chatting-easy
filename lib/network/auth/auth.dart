@@ -1,11 +1,15 @@
+import 'dart:developer';
+
 import 'package:chat_time/model/NetworkRequestModel.dart';
+import 'package:chat_time/model/user.dart';
 import 'package:chat_time/network/auth/user_state.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 Future<NetworkRequestModel> registerUserWithEmailAndPassword(
-    String email, String password) async {
+    String email, String password,
+    [String? name]) async {
   UserCredential userCredential;
   bool isSuccess;
   String message;
@@ -14,7 +18,8 @@ Future<NetworkRequestModel> registerUserWithEmailAndPassword(
         .createUserWithEmailAndPassword(email: email, password: password);
     if (userCredential.user?.email != null) {
       isSuccess = true;
-      message = "Succeesfully logged in";
+      addUserToFirebase(email, name!);
+      message = "Registered successfully, plesae login!";
     } else {
       isSuccess = false;
       message = "Error occurred!";
@@ -81,4 +86,20 @@ Future<String?> getUserImageUrl() async {
   } else {
     return null;
   }
+}
+
+addUserToFirebase(String name, String email) {
+  DocumentReference message =
+      FirebaseFirestore.instance.collection('users').doc(getUserEmail());
+
+  // Call the user's CollectionReference to add a new user
+  message
+      .set({
+        'name': name, // John Doe
+        'email': email,
+        'hasProfilePic': false // Stokes and So
+        // 42
+      })
+      .then((value) => log("User Added"))
+      .catchError((error) => log("Failed to add user: $error"));
 }

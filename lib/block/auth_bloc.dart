@@ -20,7 +20,7 @@ class AuthBloc {
 
   Stream<AuthEvent> get _authEventStream => _atuhEventController.stream;
 
-  AuthBloc([BuildContext? contextA, User? user]) {
+  AuthBloc([BuildContext? contextA, AppUser? user]) {
     _authEventStream.listen((event) {
       if (event == AuthEvent.login) {
         loginUserWithEmailAndPassword(user!.email, user.password).then((value) {
@@ -32,7 +32,8 @@ class AuthBloc {
         Navigator.pop(contextA!);
         Navigator.pushReplacementNamed(contextA, ApplicationRoute.loginRoute);
       } else if (event == AuthEvent.registration) {
-        registerUserWithEmailAndPassword(user!.email, user.password)
+        registerUserWithEmailAndPassword(
+                user!.email, user.password, user.userName)
             .then((value) {
           _authSink.add(value);
           _authSink.done;

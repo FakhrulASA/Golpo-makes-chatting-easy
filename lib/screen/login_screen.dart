@@ -169,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                       _formKey.currentState!.save();
                       final authBloc = AuthBloc(
                           null,
-                          User(
+                          AppUser(
                               userName: email.split("@")[0],
                               password: password,
                               email: email));
