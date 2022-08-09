@@ -1,6 +1,10 @@
+import 'package:chat_time/event/message_event_enum.dart';
 import 'package:flutter/material.dart';
 
+import '../block/message_block.dart';
+import '../model/chatlist_model.dart';
 import '../network/auth/auth.dart';
+import '../network/auth/user_state.dart';
 import '../util/routes.dart';
 
 Widget getMessageListItem(BuildContext context, int i) {
@@ -97,77 +101,87 @@ Widget getMessageListItem(BuildContext context, int i) {
 }
 
 Widget getFriendAddItem(BuildContext context, int i) {
-  bool isOnline;
-  if (i % 2 == 0) {
-    isOnline = true;
-  } else {
-    isOnline = false;
-  }
-  return InkWell(
-    onTap: () {
-      Navigator.pushNamed(context, ApplicationRoute.messageDetailRoute);
-    },
-    child: Container(
-      decoration: BoxDecoration(
-          color: Color.fromARGB(255, 227, 226, 236),
-          borderRadius: BorderRadius.all(Radius.circular(10))),
-      child: Column(
-        children: [
-          SizedBox(
-            height: 12,
-          ),
-          const SizedBox(
-            width: 5,
-          ),
-          CircleAvatar(
-              radius: 40,
-              backgroundColor: Colors.white,
-              backgroundImage: const AssetImage("assets/avatar.png")),
-          const SizedBox(
-            height: 10,
-          ),
-          Flexible(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(
-                  child: Text(
-                    getUserName(),
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 20,
-                        color: Colors.black87),
-                  ),
-                ),
-              ],
+  return Padding(
+    padding: const EdgeInsets.all(4.0),
+    child: InkWell(
+      onTap: () {
+        final messageBlock = MessageBlock(ChatListModel(
+            image: "fas",
+            isRead: false,
+            message: "Hi How are you",
+            sender: getUserEmail()!,
+            receiver: "babuka@asfa.com",
+            name: getUserName()));
+        messageBlock.messageEventSink.add(MessageEvent.message);
+        StreamBuilder<ChatListModel>(
+          stream: messageBlock.messageStream,
+          builder: (context, snapshot) {
+            return Text(snapshot.data!.message!);
+          },
+        );
+      },
+      child: Container(
+        decoration: BoxDecoration(
+            color: Color.fromARGB(255, 227, 226, 236),
+            borderRadius: BorderRadius.all(Radius.circular(10))),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 12,
             ),
-          ),
-          SizedBox(
-            height: 12,
-          ),
-          InkWell(
-            onTap: () {},
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Container(
-                height: 40,
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 83, 129, 228),
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                child: const Center(
-                  child: Text(
-                    "Send message",
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 253, 253, 253)),
+            const SizedBox(
+              width: 5,
+            ),
+            CircleAvatar(
+                radius: 40,
+                backgroundColor: Colors.white,
+                backgroundImage: const AssetImage("assets/avatar.png")),
+            const SizedBox(
+              height: 10,
+            ),
+            Flexible(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    child: Text(
+                      getUserName(),
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20,
+                          color: Colors.black87),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 12,
+            ),
+            InkWell(
+              onTap: () {},
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Container(
+                  height: 40,
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 83, 129, 228),
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                  child: const Center(
+                    child: Text(
+                      "Send message",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: Color.fromARGB(255, 253, 253, 253)),
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     ),
   );

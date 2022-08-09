@@ -1,6 +1,13 @@
+import 'dart:developer';
+
+import 'package:chat_time/block/auth_bloc.dart';
+import 'package:chat_time/event/auth_event.dart';
+import 'package:chat_time/model/NetworkRequestModel.dart';
+import 'package:chat_time/screen/chartlist_screen.dart';
 import 'package:chat_time/util/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import '../model/user.dart';
 import '../network/auth/auth.dart';
 import '../util/ProgressUtil.dart';
 
@@ -160,16 +167,28 @@ class _LoginPageState extends State<LoginPage> {
                     if (isvalid) {
                       showLoaderDialog(context, "Login in, please wait!");
                       _formKey.currentState!.save();
-                      loginUserWithEmailAndPassword(email, password)
-                          .then((value) {
-                        if (value.success) {
-                          Fluttertoast.showToast(msg: value.message);
-                          Navigator.pop(context);
-                          Navigator.pushReplacementNamed(
-                              context, ApplicationRoute.chartlistRoute);
+                      final authBloc = AuthBloc(
+                          null,
+                          User(
+                              userName: email.split("@")[0],
+                              password: password,
+                              email: email));
+                      authBloc.authEventSink.add(AuthEvent.login);
+                      authBloc.authStream.listen((event) {
+                        if (event.success) {
+                          Navigator.pushAndRemoveUntil<dynamic>(
+                            context,
+                            MaterialPageRoute<dynamic>(
+                              builder: (BuildContext context) =>
+                                  const ChatListPage(),
+                            ),
+                            (route) =>
+                                false, //if you want to disable back feature set to false
+                          );
                         } else {
-                          Fluttertoast.showToast(msg: value.message);
+                          Fluttertoast.showToast(msg: event.message);
                           Navigator.pop(context);
+                          log("FAIL NNNNNNNNNNNNNNNN");
                         }
                       });
                     }

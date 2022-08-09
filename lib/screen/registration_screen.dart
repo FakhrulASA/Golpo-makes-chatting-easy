@@ -75,7 +75,7 @@ class _RegistratioPageState extends State<RegistratioPage> {
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     child: TextFormField(
                       decoration: InputDecoration(
-                          hintText: "Please enter your username or email",
+                          hintText: "Please enter your email",
                           border: InputBorder.none,
                           contentPadding: EdgeInsetsGeometry.lerp(
                               const EdgeInsets.all(10),
@@ -85,11 +85,49 @@ class _RegistratioPageState extends State<RegistratioPage> {
                         if (value!.isEmpty) {
                           h1 = 80;
                           setState(() {});
-                          return "Username cannot be empty";
+                          return "Email cannot be empty";
                         } else if (value.length < 2) {
                           h1 = 80;
                           setState(() {});
                           return "Please enter valid username";
+                        } else {
+                          h1 = 50;
+                          setState(() {});
+                        }
+                        return null;
+                      },
+                      onChanged: (value) {
+                        email = value;
+                      },
+                    )),
+                const SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                    height: h1.toDouble(),
+                    decoration: const BoxDecoration(
+                        color: Color.fromARGB(255, 255, 217, 147),
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                          hintText: "Please enter your name",
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsetsGeometry.lerp(
+                              const EdgeInsets.all(10),
+                              const EdgeInsets.all(10),
+                              0.0)),
+                      validator: (String? value) {
+                        if (value!.isEmpty) {
+                          h1 = 80;
+                          setState(() {});
+                          return "Name cannot be empty";
+                        } else if (value.length < 2) {
+                          h1 = 80;
+                          setState(() {});
+                          return "Please enter valid Name";
                         } else {
                           h1 = 50;
                           setState(() {});

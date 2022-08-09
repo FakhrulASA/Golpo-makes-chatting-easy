@@ -40,9 +40,10 @@ class _ChatListPageState extends State<ChatListPage> {
   getDataFromFirebase() async {
     final imageUrl = await imagesRef.getDownloadURL();
     if (imageUrl.isNotEmpty) {
-      imageUrlPhoto = imageUrl;
       // always st setstae while working with network ima
-      setState(() {});
+      setState(() {
+        imageUrlPhoto = imageUrl;
+      });
       log(imageUrlPhoto);
     }
   }

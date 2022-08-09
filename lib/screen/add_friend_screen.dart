@@ -1,3 +1,7 @@
+import 'package:chat_time/block/message_block.dart';
+import 'package:chat_time/model/chatlist_model.dart';
+import 'package:chat_time/network/auth/auth.dart';
+import 'package:chat_time/network/auth/user_state.dart';
 import 'package:chat_time/util/color.dart';
 import 'package:flutter/material.dart';
 
@@ -42,6 +46,7 @@ class _AddFriendScreenState extends State<AddFriendScreen> {
                             const EdgeInsets.all(10),
                             0.0),
                       ),
+                      onChanged: (value) {},
                     ),
                   ),
                   const SizedBox(
@@ -55,7 +60,8 @@ class _AddFriendScreenState extends State<AddFriendScreen> {
             child: GridView.count(
               crossAxisCount: 2,
               children: List.generate(3, (index) {
-                return Card(
+                return InkWell(
+                    onTap: () {},
                     child: getFriendAddItem(context,
                         index)); //robohash.org api provide you different images for any number you are giving
               }),

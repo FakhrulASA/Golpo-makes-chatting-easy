@@ -1,9 +1,11 @@
+// ignore: file_names
 import 'dart:developer';
 
-import 'package:chat_time/component/common_button.dart';
+import 'package:chat_time/block/auth_bloc.dart';
+import 'package:chat_time/event/auth_event.dart';
+import 'package:chat_time/model/NetworkRequestModel.dart';
 import 'package:chat_time/util/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import '../network/auth/auth.dart';
 
@@ -19,7 +21,7 @@ showLoaderDialog(BuildContext context, String message) {
             height: 30,
           ),
           Container(
-              margin: EdgeInsets.only(left: 7),
+              margin: const EdgeInsets.only(left: 7),
               child: Text(
                 message,
                 style: const TextStyle(
@@ -47,9 +49,9 @@ showCommonDialog(BuildContext context) {
     content: IntrinsicHeight(
       child: Column(
         children: [
-          Text(
+          const Text(
             "Are you sure you wan't to log out from the application?",
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
           ),
           const SizedBox(
             height: 30,
@@ -58,17 +60,19 @@ showCommonDialog(BuildContext context) {
             children: [
               Flexible(
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
                   child: Container(
                     height: 50,
                     width: double.infinity,
                     decoration: const BoxDecoration(
                         color: Color.fromARGB(255, 148, 31, 31),
                         borderRadius: BorderRadius.all(Radius.circular(10))),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         "No",
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w500,
                             color: Colors.white),
@@ -83,31 +87,8 @@ showCommonDialog(BuildContext context) {
               Flexible(
                 child: InkWell(
                   onTap: () {
-                    FutureBuilder(
-                      future: signOut(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          Navigator.pushReplacementNamed(
-                              context, ApplicationRoute.loginRoute);
-                        }
-                        switch (snapshot.connectionState) {
-                          case ConnectionState.waiting:
-                            {
-                              return showLoaderDialog(
-                                  context, "Login out, please wait!");
-                            }
-
-                          default:
-                            {
-                              if (snapshot.hasError) {
-                                return Text('Error: ${snapshot.error}');
-                              } else {
-                                return Text('Result: ${snapshot.data}');
-                              }
-                            }
-                        }
-                      },
-                    );
+                    final authBlock = AuthBloc(context, null);
+                    authBlock.authEventSink.add(AuthEvent.logout);
                   },
                   child: Container(
                     height: 50,
@@ -115,10 +96,10 @@ showCommonDialog(BuildContext context) {
                     decoration: const BoxDecoration(
                         color: Color.fromARGB(255, 148, 31, 31),
                         borderRadius: BorderRadius.all(Radius.circular(10))),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         "Yes",
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w500,
                             color: Colors.white),
