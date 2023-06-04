@@ -8,4 +8,4 @@
 4. Firestore
 5. Firebase Auth
 6. Firebase Storage
-7. Vibration 
+7. Vibration
